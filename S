@@ -1,0 +1,416 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <Windows.h>
+
+#define A 7
+
+void swapD(double* a, double* b);
+void swapI(int* a, int* b);
+void printD(double* arr, int N);
+void printI(int* arr, int N);
+double TimerD(void Vizov(double*, int), double* arr, int N);
+double TimerI(void Vizov(int*, int), int* arr, int N);
+void Print();
+
+void bubbleSort(double* arr, int N);
+void insertionSort(double* arr, int N);
+void selectSort(double* arr, int N);
+void mergeSort(double* arr, int N);
+void MergeSortExt(double* arr, int start, int end, double* tmp);
+void Merge(double* arr, int start, int mid, int end, double* tmp);
+
+void countingSort(int* arr, int N);
+
+int main()
+{
+	//Консоль
+	HANDLE consol = GetStdHandle(STD_OUTPUT_HANDLE);
+	//Позиция курсора
+	COORD pos; pos.X = 0; pos.Y = 0;
+	//SetConsoleCursorPosition(consol, pos);
+
+	Print();
+
+	int N = 50000;
+	double* arrDSred = (double*)malloc(N * sizeof(double));
+	for (int i = 0; i < N; i++)
+		arrDSred[i] = rand() % 50000;
+	double* arrDBest = (double*)malloc(N * sizeof(double));
+	for (int i = 0; i < N; i++)
+		arrDBest[i] = i;
+	double* arrDWorst = (double*)malloc(N * sizeof(double));
+	for (int i = 0; i < N; i++)
+		arrDWorst[i] = N-i;
+	//Bubble
+	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 1;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n^2) = %0.3lf", TimerD(bubbleSort, arrDWorst, N));
+	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 1;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n^2) = %0.3lf", TimerD(bubbleSort, arrDSred, N));
+	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 1;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n) = %0.3lf", TimerD(bubbleSort, arrDBest, N));
+	//Insertion
+	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 2;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n^2) = %0.3lf", TimerD(insertionSort, arrDWorst, N));
+	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 2;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n^2) = %0.3lf", TimerD(insertionSort, arrDSred, N));
+	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 2;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n) = %0.3lf", TimerD(insertionSort, arrDBest, N));
+	//Select
+	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 3;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n^2) = %0.3lf", TimerD(selectSort, arrDWorst, N));
+	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 3;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n^2) = %0.3lf", TimerD(selectSort, arrDSred, N));
+	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 3;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n^2) = %0.3lf", TimerD(selectSort, arrDBest, N));
+	//Merge
+	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 4;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n*log n) = %0.3lf", TimerD(mergeSort, arrDWorst, N));
+	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 4;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n*log n) = %0.3lf", TimerD(mergeSort, arrDSred, N));
+	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 4;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n*log n) = %0.3lf", TimerD(mergeSort, arrDBest, N));
+	//Fast
+	// pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 5;
+	/*
+	SetConsoleCursorPosition(consol, pos);
+	printf("Fast Sort");
+	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 5;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Fast Sort");
+	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 5;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Fast Sort");
+	*/
+
+	//
+	N = 200000000;
+	int* arrISred = (int*)malloc(N * sizeof(int));
+	for (int i = 0; i < N; i++)
+		arrISred[i] = rand() % 200;
+	int* arrIBest = (int*)malloc(N * sizeof(int));
+	for (int i = 0; i < N; i++)
+		arrIBest[i] = i/10000;
+	int* arrIWorst = (int*)malloc(N * sizeof(int));
+	for (int i = 0; i < N; i++)
+		arrIWorst[i] = (N - i-1)/10000;
+
+	//Counting
+	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("%lf\n", TimerI(countingSort, arrIWorst, N));
+	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("%lf\n", TimerI(countingSort, arrISred, N));
+	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("%lf\n", TimerI(countingSort, arrIBest, N));
+
+	free(arrDSred);
+	free(arrDBest);
+	free(arrDWorst);
+	//Возврат консольного курсора
+	pos.X = 0; pos.Y = 1 + 4 * 2 + 4 * A;
+	SetConsoleCursorPosition(consol, pos);
+}
+//Сортировка пузырьком
+void bubbleSort(double* arr, int N)
+{
+	for (int i = 0; i < N-1; i++)
+	{
+		char flag = 1;
+		for (int j = i; j < N; j++)
+		{
+			if (arr[j] < arr[i])
+			{
+				swapD(&arr[j], &arr[i]);
+				flag = 0;
+			}
+		}
+		if (flag == 1)
+			break;
+	}
+}
+//Сортировка вставками
+void insertionSort(double* arr, int N)
+{
+	for (int i = 1; i < N; i++)
+	{
+		int j = i;
+		while (j - 1 >= 0 && arr[j] < arr[j - 1])
+		{
+			swapD(&arr[j], &arr[j - 1]);
+			j -= 1;
+		}
+	}
+}
+//Сортировка выбором
+void selectSort(double* arr, int N)
+{
+	for (int i = 0; i < N - 1; i++)
+	{
+		int index = i;
+		for (int j = i; j < N; j++)
+		{
+			if (arr[j] < arr[index])
+				index = j;
+		}
+		swapD(&arr[index], &arr[i]);
+	}
+}
+//Сортировка слиянием
+void mergeSort(double* arr, int N)
+{
+	int start = 0, end = N;
+	double* tmp = (double*)malloc(end * sizeof(double));
+	MergeSortExt(arr, start, end, tmp);
+	free(tmp);
+}
+void MergeSortExt(double* arr, int start, int end, double* tmp)
+{
+	if (start + 1 == end)
+	{
+		return;
+	}
+	int mid = start + (end - start) / 2;
+	MergeSortExt(arr, start, mid, tmp);
+	MergeSortExt(arr, mid, end, tmp);
+	
+	int i = start, j = mid, count = start;
+	while (i < mid && j < end)
+	{
+		if (arr[i] < arr[j])
+			tmp[count++] = arr[i++];
+		else if (arr[i] >= arr[j])
+			tmp[count++] = arr[j++];
+	}
+	while (i < mid)
+		tmp[count++] = arr[i++];
+	while (j < end) 
+		tmp[count++] = arr[j++];
+	for (int h = start; h < end; h++)
+		arr[h] = tmp[h];
+}
+void Merge(double* arr, int start, int mid, int end, double* tmp)
+{
+	int i = 0, j = mid, count = 0;
+	while (i < mid && j < end)
+	{
+		if (arr[i] < arr[j])
+			tmp[count++] = arr[i++];
+		else if (arr[i] >= arr[j])
+			tmp[count++] = arr[j++];
+	}
+	while (i < mid) tmp[count++] = arr[i++];
+	while (j < end) tmp[count++] = arr[j++];
+	printD(tmp, end);
+}
+//Быстрая сортировка
+void fastSort(double* arr, int N)
+{
+
+}
+//Сортировка подсчётом
+void countingSort(int* arr, int N)
+{
+	int max = arr[0];
+	for (int a = 1; a < N; a++)
+	{
+		if (max < arr[a])
+			max = arr[a];
+	}
+	int* dop = (int*)malloc((max + 1) * sizeof(int));
+	for (int d = 0; d < max + 1; d++)
+	{
+		dop[d] = 0;
+	}
+	for (int b = 0; b < N; b++)
+	{
+		int x = arr[b];
+		dop[x] += 1;
+	}
+	int i = 0;
+	for (int c = 0; c < max; c++)
+	{
+		while (dop[c] != 0)
+		{
+			arr[i] = c;
+			dop[c] -= 1;
+			i += 1;
+		}
+	}
+	free(dop);
+}
+//Поразрядная сортировка
+void radixSort(double* arr, int N)
+{
+
+}
+//Смена значений
+void swapD(double* a, double* b)
+{
+	double tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+//Смена значений
+void swapI(int* a, int* b)
+{
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+//Таймер
+double TimerD(void Vizov(double*, int), double* arr, int N)
+{
+	double* Extrarr = (double*)malloc(N * sizeof(double));
+	for (int i = 0; i < N; i++)
+	{
+		Extrarr[i] = arr[i];
+	}
+	clock_t start, end;
+	start = clock();
+
+	Vizov(Extrarr, N);
+
+	end = clock();
+	double TimeTaken = double(end - start) / double(CLOCKS_PER_SEC);
+	free(Extrarr);
+	return TimeTaken;
+}
+double TimerI(void Vizov(int*, int), int* arr, int N)
+{
+	int* Extrarr = (int*)malloc(N * sizeof(int));
+	for (int i = 0; i < N; i++)
+	{
+		Extrarr[i] = arr[i];
+	}
+	clock_t start, end;
+	start = clock();
+
+	Vizov(Extrarr, N);
+
+	end = clock();
+	double TimeTaken = double(double(end - start) / CLOCKS_PER_SEC);
+	free(Extrarr);
+	return TimeTaken;
+}
+//Вывод в консоль таблицы
+void Print()
+{
+	//Консоль
+	HANDLE consol = GetStdHandle(STD_OUTPUT_HANDLE);
+	//Позиция курсора
+	COORD pos; pos.X = 0; pos.Y = 0;
+	//SetConsoleCursorPosition(consol, pos);
+	for (int y = 0; y < 1+4*2 + 4*A; y++)
+	{
+		int x = 0;
+		while (x <= 110)
+		{
+			if ((x == 0 || x == 20 || x == 40 || x == 60 || x == 80 || x == 90 || x == 100 || x == 110) && (y % 4 == 0) && !((x == 40 || x == 60) && y == 0))
+			{
+				printf("+");
+				x++;
+			}
+			else if ((x == 0 || x == 20 || x == 40 || x == 60 || x == 80 || x == 90 || x == 100 || x == 110) && !((x == 40 || x == 60) && (y >= 0 && y <= 3)))
+			{
+				printf("|");
+				x++;
+			}
+			else if (y % 4 == 0 && !(y == 4 && (x < 20 || x > 80)))
+			{
+				printf("-");
+				x++;
+			}
+			else
+			{
+				printf(" ");
+				x++;
+			}
+		}
+		printf("\n");
+	}
+	//Начальное положение
+	pos.X = 2+4; pos.Y = 4;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Sortings");
+	pos.X = 22; pos.Y = 2;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Algorithmic complexity");
+	pos.X = 82; pos.Y = 3;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Extra");
+	pos.X = 82; pos.Y = 4;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Memory");
+	pos.X = 82; pos.Y = 5;
+	SetConsoleCursorPosition(consol, pos);
+	printf(" O(n)");
+	pos.X = 92; pos.Y = 4;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Stable");
+	pos.X = 102; pos.Y = 4;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Natural");
+	pos.X = 22+6; pos.Y = 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Worst");
+	pos.X = 42+5; pos.Y = 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Average");
+	pos.X = 62+6; pos.Y = 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Best");
+	//Названия сортировок
+	pos.X = 2; pos.Y = (4 * 1) + 2 + 4 * 1;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Bubble Sort");
+	pos.X = 2; pos.Y = (4 * 1) + 2 + 4 * 2;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Insertion Sort");
+	pos.X = 2; pos.Y = (4 * 1) + 2 + 4 * 3;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Select Sort");
+	pos.X = 2; pos.Y = (4 * 1) + 2 + 4 * 4;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Merge Sort");
+	pos.X = 2; pos.Y = (4 * 1) + 2 + 4 * 5;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Fast Sort");
+	pos.X = 2; pos.Y = (4 * 1) + 2 + 4 * 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("Counting Sort");
+}
+
+//Вывод в консоль массив Double
+void printD(double* arr, int N)
+{
+	for (int a = 0; a < N; a++)
+	{
+		printf("%0.2lf ", arr[a]);
+	}
+	printf("\n");
+}
+//Вывод в консоль массив Int
+void printI(int* arr, int N)
+{
+	for (int a = 0; a < N; a++)
+	{
+		printf("%d ", arr[a]);
+	}
+	printf("\n");
+}
