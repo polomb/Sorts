@@ -3,7 +3,7 @@
 #include <time.h>
 #include <Windows.h>
 
-#define A 7
+#define A 8
 #define D1 10000
 #define D2 1000000
 #define D3 10000000
@@ -33,6 +33,7 @@ void MergeSortExt(double* arr, int start, int end, double* tmp);
 void quickSort(double* arr, int N);
 void fastSort(double* arr, int start, int end);
 int partition(double* arr, int start, int end);
+void shellSort(double* array, int size);
 
 void countingSort(int* arr, int N);
 void radixSort(int* arr, int N);
@@ -122,6 +123,16 @@ int main()
 	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 5;
 	SetConsoleCursorPosition(consol, pos);
 	printf("O(n*log n) = %0.3lf", TimerD(mergeSort, arrDBest1, N));
+	//Shell
+	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n*log n) = %0.3lf", TimerD(mergeSort, arrDWorst1, N));
+	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n*log n) = %0.3lf", TimerD(mergeSort, arrDSred1, N));
+	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 6;
+	SetConsoleCursorPosition(consol, pos);
+	printf("O(n*log n) = %0.3lf", TimerD(mergeSort, arrDBest1, N));
 	free(arrDSred1);
 	free(arrDBest1);
 	free(arrDWorst1);
@@ -138,15 +149,15 @@ int main()
 		arrIWorst[i] = (N - i - 1) / (D3 / FORCOUNT);
 
 	//Counting
-	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 6;
+	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 7;
 	SetConsoleCursorPosition(consol, pos);
-	printf("%lf\n", TimerI(countingSort, arrIWorst, N));
-	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 6;
+	printf("O(n) = %0.3lf", TimerI(countingSort, arrIWorst, N));
+	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 7;
 	SetConsoleCursorPosition(consol, pos);
-	printf("%lf\n", TimerI(countingSort, arrISred, N));
-	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 6;
+	printf("O(n) = %0.3lf", TimerI(countingSort, arrISred, N));
+	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 7;
 	SetConsoleCursorPosition(consol, pos);
-	printf("%lf\n", TimerI(countingSort, arrIBest, N));
+	printf("O(n) = %0.3lf", TimerI(countingSort, arrIBest, N));
 
 	free(arrISred);
 	free(arrIBest);
@@ -164,15 +175,15 @@ int main()
 		arrIWorstR[i] = (N - i - 1) / (D3 / FORRADIX);
 
 	//Radix
-	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 7;
+	pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 8;
 	SetConsoleCursorPosition(consol, pos);
-	printf("%lf\n", TimerI(radixSort, arrIWorstR, N));
-	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 7;
+	printf("O(n) = %0.3lf", TimerI(radixSort, arrIWorstR, N));
+	pos.X = 42; pos.Y = (4 * 1) + 2 + 4 * 8;
 	SetConsoleCursorPosition(consol, pos);
-	printf("%lf\n", TimerI(radixSort, arrISredR, N));
-	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 7;
+	printf("O(n) = %0.3lf", TimerI(radixSort, arrISredR, N));
+	pos.X = 62; pos.Y = (4 * 1) + 2 + 4 * 8;
 	SetConsoleCursorPosition(consol, pos);
-	printf("%lf\n", TimerI(radixSort, arrIBestR, N));
+	printf("O(n) = %0.3lf", TimerI(radixSort, arrIBestR, N));
 
 	free(arrISredR);
 	free(arrIBestR);
@@ -215,6 +226,9 @@ int main()
 	double* arr5 = (double*)malloc(NTEST * sizeof(double));
 	for (int i = 0; i < NTEST; i++)
 		arr5[i] = arr1[i];
+	double* arr6 = (double*)malloc(NTEST * sizeof(double));
+	for (int i = 0; i < NTEST; i++)
+		arr6[i] = arr1[i];
 	printf("Bubble\n");
 	TestD(bubbleSort, arr1, NTEST);
 	printf("Insertion\n");
@@ -225,30 +239,32 @@ int main()
 	TestD(mergeSort, arr4, NTEST);
 	printf("Quick\n");
 	TestD(quickSort, arr5, NTEST);
+	printf("Shell\n");
+	TestD(shellSort, arr6, NTEST);
 
-	int* arr6 = (int*)malloc(NTEST * sizeof(int));
 	int* arr7 = (int*)malloc(NTEST * sizeof(int));
+	int* arr8 = (int*)malloc(NTEST * sizeof(int));
 	if (x == 0)
 	{
 		for (int i = 0; i < NTEST; i++)
-			arr6[i] = i;
+			arr7[i] = i;
 	}
 	if (x == 1)
 	{
 		for (int i = 0; i < NTEST; i++)
-			arr6[i] = NTEST - i;
+			arr7[i] = NTEST - i;
 	}
 	if (x == 2)
 	{
 		for (int i = 0; i < NTEST; i++)
-			arr6[i] = rand() % FORTESTS;
+			arr7[i] = rand() % FORTESTS;
 	}
 	for (int i = 0; i < NTEST; i++)
-		arr7[i] = arr6[i];
+		arr8[i] = arr7[i];
 	printf("Counting\n");
-	TestI(countingSort, arr6, NTEST);
+	TestI(countingSort, arr7, NTEST);
 	printf("Radix\n");
-	TestI(radixSort, arr7, NTEST);
+	TestI(radixSort, arr8, NTEST);
 	free(arr1);
 	free(arr2);
 	free(arr3);
@@ -256,6 +272,7 @@ int main()
 	free(arr5);
 	free(arr6);
 	free(arr7);
+	free(arr8);
 }
 //Сортировка пузырьком
 void bubbleSort(double* arr, int N)
@@ -346,9 +363,21 @@ void fastSort(double* arr, int start, int end)
 {
 	if (end - start <= 1)
 		return;
-	int q = partition(arr, start, end);
-	fastSort(arr, start, q);
-	fastSort(arr, q, end);
+	int q;
+	while (start < end) 
+	{
+		q = partition(arr, start, end);
+		if (q - start < end - q)
+		{
+			fastSort(arr, start, q);
+			start = q + 1;
+		}
+		else
+		{
+			fastSort(arr, q+1, end);
+			end = q;
+		}
+	}
 }
 int partition(double* arr, int start, int end)
 {
@@ -357,11 +386,29 @@ int partition(double* arr, int start, int end)
 	{
 		while (arr[++i] < pivot);
 		while (arr[--j] > pivot);
-		if (i >= j) break;
-		swapD(&arr[i], &arr[j]);
+		if (i < j) swapD(&arr[i], &arr[j]);
+		else
+		{
+			swapD(&arr[i], &arr[end]);
+			return j;
+		}
 	}
-	swapD(&arr[i], &arr[end]);
-	return j;
+}
+//Сортировка Шеллы
+void shellSort(double* array, int size) 
+{
+	for (int a = size / 2; a > 0; a /= 2) 
+	{
+		for (int b = a; b < size; ++b) 
+		{
+			for (int c = b - a; c >= 0 && array[c] > array[c + a]; c -= a) 
+			{
+				int temp = array[c];
+				array[c] = array[c + a];
+				array[c + a] = temp;
+			}
+		}
+	}
 }
 
 //Сортировка подсчётом
@@ -585,12 +632,13 @@ void Print()
 	printf("Fast Sort");
 	pos.X = 2; pos.Y = (4 * 1) + 2 + 4 * 6;
 	SetConsoleCursorPosition(consol, pos);
-	printf("Counting Sort");
+	printf("Shell Sort");
 	pos.X = 2; pos.Y = (4 * 1) + 2 + 4 * 7;
 	SetConsoleCursorPosition(consol, pos);
-	printf("Radix Sort");
+	printf("Counting Sort");
 	pos.X = 2; pos.Y = (4 * 1) + 2 + 4 * 8;
 	SetConsoleCursorPosition(consol, pos);
+	printf("Radix Sort");
 	//Доп память
 	pos.X = 82; pos.Y = (4 * 1) + 2 + 4 * 1;
 	SetConsoleCursorPosition(consol, pos);
@@ -609,12 +657,13 @@ void Print()
 	printf("O(1)");
 	pos.X = 82; pos.Y = (4 * 1) + 2 + 4 * 6;
 	SetConsoleCursorPosition(consol, pos);
-	printf("O(n)");
+	printf("O(1)");
 	pos.X = 82; pos.Y = (4 * 1) + 2 + 4 * 7;
 	SetConsoleCursorPosition(consol, pos);
 	printf("O(n)");
 	pos.X = 82; pos.Y = (4 * 1) + 2 + 4 * 8;
 	SetConsoleCursorPosition(consol, pos);
+	printf("O(n)");
 	//Устойчивость
 	pos.X = 92; pos.Y = (4 * 1) + 2 + 4 * 1;
 	SetConsoleCursorPosition(consol, pos);
@@ -633,12 +682,13 @@ void Print()
 	printf("?");
 	pos.X = 92; pos.Y = (4 * 1) + 2 + 4 * 6;
 	SetConsoleCursorPosition(consol, pos);
-	printf("+");
+	printf("+?");
 	pos.X = 92; pos.Y = (4 * 1) + 2 + 4 * 7;
 	SetConsoleCursorPosition(consol, pos);
 	printf("+");
 	pos.X = 92; pos.Y = (4 * 1) + 2 + 4 * 8;
 	SetConsoleCursorPosition(consol, pos);
+	printf("+");
 	//Естественность
 	pos.X = 102; pos.Y = (4 * 1) + 2 + 4 * 1;
 	SetConsoleCursorPosition(consol, pos);
@@ -657,12 +707,13 @@ void Print()
 	printf("-");
 	pos.X = 102; pos.Y = (4 * 1) + 2 + 4 * 6;
 	SetConsoleCursorPosition(consol, pos);
-	printf("-");
+	printf("+?");
 	pos.X = 102; pos.Y = (4 * 1) + 2 + 4 * 7;
 	SetConsoleCursorPosition(consol, pos);
 	printf("-");
 	pos.X = 102; pos.Y = (4 * 1) + 2 + 4 * 8;
 	SetConsoleCursorPosition(consol, pos);
+	printf("-");
 }
 //Смена значений
 void swapD(double* a, double* b)
