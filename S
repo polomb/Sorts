@@ -310,6 +310,22 @@ int main()
 			int b1 = D1 - ((D1 / 20) * a);
 			int b2 = D2 - ((D2 / 20) * a);
 			int b3 = D3 - ((D3 / 20) * a);
+			//Это для того, чтобы всё было одной строкой
+
+			printf("Bubble;n;%d;%0.3lf;%0.3lf;%0.3lf;", b1, TimerD(bubbleSort, arrDWorst, b1), TimerD(bubbleSort, arrDSred, b1), TimerD(bubbleSort, arrDBest, b1));
+			printf("Insertion;n;%d;%0.3lf;%0.3lf;%0.3lf;", b1, TimerD(insertionSort, arrDWorst, b1), TimerD(insertionSort, arrDSred, b1), TimerD(insertionSort, arrDBest, b1));
+			printf("Select;n;%d;%0.3lf;-;%0.3lf;", b1, TimerD(selectSort, arrDWorst, b1), TimerD(selectSort, arrDSred, b1), TimerD(selectSort, arrDBest, b1));
+			printf("Quick;n;%d;%0.3lf;%0.3lf;%0.3lf;", b1, TimerD(quickSort, arrDWorst1, b1), TimerD(quickSort, arrDBest1, b1));
+
+			printf("Merge;n;%d;%0.3lf;%0.3lf;%0.3lf;", b2, TimerD(mergeSort, arrDWorst1, b2), TimerD(mergeSort, arrDSred1, b2), TimerD(mergeSort, arrDBest1, b2));
+			printf("Quick;n;%d;-;%0.3lf;-;", b2, TimerD(quickSort, arrDSred1, b2));
+			printf("Shell;n;%d;%0.3lf;%0.3lf;%0.3lf;", b2, TimerD(shellSort, arrDWorst1, b2), TimerD(shellSort, arrDSred1, b2), TimerD(shellSort, arrDBest1, b2));
+
+			printf("Counting;n;%d;%0.3lf;%0.3lf;%0.3lf;", b3, TimerI(countingSort, arrIWorst, b3), TimerI(countingSort, arrISred, b3), TimerI(countingSort, arrIBest, b3));
+			printf("Radix;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b3, TimerI(radixSort, arrIWorstR, b3), TimerI(radixSort, arrISredR, b3), TimerI(radixSort, arrIBestR, b3));
+
+			/*
+			Это старый вариант, тут будет 9 строк для одного случая. Тут всё вкусовщина для excel
 			printf("Bubble;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b1, TimerD(bubbleSort, arrDWorst, b1), TimerD(bubbleSort, arrDSred, b1), TimerD(bubbleSort, arrDBest, b1));
 			printf("Insertion;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b1, TimerD(insertionSort, arrDWorst, b1), TimerD(insertionSort, arrDSred, b1), TimerD(insertionSort, arrDBest, b1));
 			printf("Select;n;%d;%0.3lf;-;%0.3lf\n", b1, TimerD(selectSort, arrDWorst, b1), TimerD(selectSort, arrDSred, b1), TimerD(selectSort, arrDBest, b1));
@@ -321,7 +337,7 @@ int main()
 
 			printf("Counting;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b3, TimerI(countingSort, arrIWorst, b3), TimerI(countingSort, arrISred, b3), TimerI(countingSort, arrIBest, b3));
 			printf("Radix;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b3, TimerI(radixSort, arrIWorstR, b3), TimerI(radixSort, arrISredR, b3), TimerI(radixSort, arrIBestR, b3));
-
+			*/
 			a -= 1;
 		}
 		free(arrDSred);
