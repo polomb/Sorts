@@ -4,11 +4,11 @@
 #include <Windows.h>
 
 #define A 8
-#define D1 102400
-#define D2 10240000
-#define D3 102400000
-#define FORCOUNT 10000
-#define FORRADIX 10000
+#define D1 100000
+#define D2 10000000
+#define D3 100000000
+#define FORCOUNT 100
+#define FORRADIX 100
 
 #define NTEST 20
 #define FORTESTS 100
@@ -304,18 +304,18 @@ int main()
 		for (int i = 0; i < N; i++)
 			arrIWorstR[i] = (N - i - 1) / (D3 / FORRADIX);
 
-		int a = 1024;
-		while (a >= 1)
+		int a = 19;
+		while (a >= 0)
 		{
-			int b1 = D1 / a;
-			int b2 = D2 / a;
-			int b3 = D3 / a;
+			int b1 = D1 - ((D1 / 20) * a);
+			int b2 = D2 - ((D2 / 20) * a);
+			int b3 = D3 - ((D3 / 20) * a);
 			printf("Bubble;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b1, TimerD(bubbleSort, arrDWorst, b1), TimerD(bubbleSort, arrDSred, b1), TimerD(bubbleSort, arrDBest, b1));
 			printf("Insertion;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b1, TimerD(insertionSort, arrDWorst, b1), TimerD(insertionSort, arrDSred, b1), TimerD(insertionSort, arrDBest, b1));
 			printf("Select;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b1, TimerD(selectSort, arrDWorst, b1), TimerD(selectSort, arrDSred, b1), TimerD(selectSort, arrDBest, b1));
 
 			printf("Merge;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b2, TimerD(mergeSort, arrDWorst1, b2), TimerD(mergeSort, arrDSred1, b2), TimerD(mergeSort, arrDBest1, b2));
-			if (a == 1024)
+			if (a <= 2)
 				printf("Quick;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b2, TimerD(quickSort, arrDWorst1, b2), TimerD(quickSort, arrDSred1, b2), TimerD(quickSort, arrDBest1, b2));
 			else
 				printf("Quick;n;%d;%0.3lf\n", b2, TimerD(quickSort, arrDSred1, b2));
@@ -324,7 +324,7 @@ int main()
 			printf("Counting;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b3, TimerI(countingSort, arrIWorst, b3), TimerI(countingSort, arrISred, b3), TimerI(countingSort, arrIBest, b3));
 			printf("Radix;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b3, TimerI(radixSort, arrIWorstR, b3), TimerI(radixSort, arrISredR, b3), TimerI(radixSort, arrIBestR, b3));
 
-			a /= 2;
+			a -= 1;
 		}
 		free(arrDSred);
 		free(arrDBest);
