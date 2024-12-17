@@ -328,8 +328,8 @@ int main()
 			Это старый вариант, тут будет 9 строк для одного случая. Тут всё вкусовщина для excel
 			printf("Bubble;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b1, TimerD(bubbleSort, arrDWorst, b1), TimerD(bubbleSort, arrDSred, b1), TimerD(bubbleSort, arrDBest, b1));
 			printf("Insertion;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b1, TimerD(insertionSort, arrDWorst, b1), TimerD(insertionSort, arrDSred, b1), TimerD(insertionSort, arrDBest, b1));
-			printf("Select;n;%d;%0.3lf;-;%0.3lf\n", b1, TimerD(selectSort, arrDWorst, b1), TimerD(selectSort, arrDSred, b1), TimerD(selectSort, arrDBest, b1));
-			printf("Quick;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b1, TimerD(quickSort, arrDWorst1, b1), TimerD(quickSort, arrDBest1, b1));
+			printf("Select;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b1, TimerD(selectSort, arrDWorst, b1), TimerD(selectSort, arrDSred, b1), TimerD(selectSort, arrDBest, b1));
+			printf("Quick;n;%d;%0.3lf;-;%0.3lf\n", b1, TimerD(quickSort, arrDWorst1, b1), TimerD(quickSort, arrDBest1, b1));
 
 			printf("Merge;n;%d;%0.3lf;%0.3lf;%0.3lf\n", b2, TimerD(mergeSort, arrDWorst1, b2), TimerD(mergeSort, arrDSred1, b2), TimerD(mergeSort, arrDBest1, b2));
 			printf("Quick;n;%d;-;%0.3lf;-\n", b2, TimerD(quickSort, arrDSred1, b2));
