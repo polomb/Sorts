@@ -322,7 +322,7 @@ int main()
 			printf("Shell;%0.3lf;%0.3lf;%0.3lf;", b2, TimerD(shellSort, arrDWorst1, b2), TimerD(shellSort, arrDSred1, b2), TimerD(shellSort, arrDBest1, b2));
 
 			printf("n;%d;Counting;%0.3lf;%0.3lf;%0.3lf;", b3, TimerI(countingSort, arrIWorst, b3), TimerI(countingSort, arrISred, b3), TimerI(countingSort, arrIBest, b3));
-			printf("Radix;0.3lf;%0.3lf;%0.3lf\n", b3, TimerI(radixSort, arrIWorstR, b3), TimerI(radixSort, arrISredR, b3), TimerI(radixSort, arrIBestR, b3));
+			printf("Radix;%0.3lf;%0.3lf;%0.3lf\n", b3, TimerI(radixSort, arrIWorstR, b3), TimerI(radixSort, arrISredR, b3), TimerI(radixSort, arrIBestR, b3));
 
 			/*
 			Это старый вариант, тут будет 9 строк для одного случая. Тут всё вкусовщина для excel
