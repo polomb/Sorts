@@ -313,16 +313,16 @@ int main()
 			//Это для того, чтобы всё было одной строкой
 
 			printf("N;%d;Bubble;%0.3lf;%0.3lf;%0.3lf;", b1, TimerD(bubbleSort, arrDWorst, b1), TimerD(bubbleSort, arrDSred, b1), TimerD(bubbleSort, arrDBest, b1));
-			printf("Insertion;%0.3lf;%0.3lf;%0.3lf;", b1, TimerD(insertionSort, arrDWorst, b1), TimerD(insertionSort, arrDSred, b1), TimerD(insertionSort, arrDBest, b1));
-			printf("Select;%0.3lf;%0.3lf;%0.3lf;", b1, TimerD(selectSort, arrDWorst, b1), TimerD(selectSort, arrDSred, b1), TimerD(selectSort, arrDBest, b1));
-			printf("Quick;%0.3lf;-;%0.3lf;", b1, TimerD(quickSort, arrDWorst1, b1), TimerD(quickSort, arrDBest1, b1));
+			printf("Insertion;%0.3lf;%0.3lf;%0.3lf;", TimerD(insertionSort, arrDWorst, b1), TimerD(insertionSort, arrDSred, b1), TimerD(insertionSort, arrDBest, b1));
+			printf("Select;%0.3lf;%0.3lf;%0.3lf;", TimerD(selectSort, arrDWorst, b1), TimerD(selectSort, arrDSred, b1), TimerD(selectSort, arrDBest, b1));
+			printf("Quick;%0.3lf;-;%0.3lf;", TimerD(quickSort, arrDWorst1, b1), TimerD(quickSort, arrDBest1, b1));
 
 			printf("N;%d;Merge;%0.3lf;%0.3lf;%0.3lf;", b2, TimerD(mergeSort, arrDWorst1, b2), TimerD(mergeSort, arrDSred1, b2), TimerD(mergeSort, arrDBest1, b2));
-			printf("Quick;-;%0.3lf;-;", b2, TimerD(quickSort, arrDSred1, b2));
-			printf("Shell;%0.3lf;%0.3lf;%0.3lf;", b2, TimerD(shellSort, arrDWorst1, b2), TimerD(shellSort, arrDSred1, b2), TimerD(shellSort, arrDBest1, b2));
+			printf("Quick;-;%0.3lf;-;", TimerD(quickSort, arrDSred1, b2));
+			printf("Shell;%0.3lf;%0.3lf;%0.3lf;", TimerD(shellSort, arrDWorst1, b2), TimerD(shellSort, arrDSred1, b2), TimerD(shellSort, arrDBest1, b2));
 
 			printf("n;%d;Counting;%0.3lf;%0.3lf;%0.3lf;", b3, TimerI(countingSort, arrIWorst, b3), TimerI(countingSort, arrISred, b3), TimerI(countingSort, arrIBest, b3));
-			printf("Radix;%0.3lf;%0.3lf;%0.3lf\n", b3, TimerI(radixSort, arrIWorstR, b3), TimerI(radixSort, arrISredR, b3), TimerI(radixSort, arrIBestR, b3));
+			printf("Radix;%0.3lf;%0.3lf;%0.3lf\n", TimerI(radixSort, arrIWorstR, b3), TimerI(radixSort, arrISredR, b3), TimerI(radixSort, arrIBestR, b3));
 
 			/*
 			Это старый вариант, тут будет 9 строк для одного случая. Тут всё вкусовщина для excel
