@@ -4,9 +4,9 @@
 #include <Windows.h>
 
 #define A 8
-#define D1 200000
-#define D2 20000000
-#define D3 200000000
+#define D1 2000
+#define D2 2000
+#define D3 2000
 #define FORCOUNT 100
 #define FORRADIX 100
 
@@ -60,13 +60,13 @@ int main()
 		int N = D1;
 		double* arrDSred = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDSred[i] = rand() % D1 / 10;
+			arrDSred[i] = (rand() % D1) / 10.0;
 		double* arrDBest = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDBest[i] = i;
+			arrDBest[i] = i / 10.0;
 		double* arrDWorst = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDWorst[i] = N - i;
+			arrDWorst[i] = (N - i) / 10.0;
 		//Bubble
 		pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 1;
 		SetConsoleCursorPosition(consol, pos);
@@ -104,13 +104,13 @@ int main()
 		N = D2;
 		double* arrDSred1 = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDSred1[i] = rand() % D2 / 10;
+			arrDSred1[i] = (rand() % D2) / 10.0;
 		double* arrDBest1 = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDBest1[i] = i;
+			arrDBest1[i] = i / 10.0;
 		double* arrDWorst1 = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDWorst1[i] = N - i;
+			arrDWorst1[i] = (N - i) / 10.0;
 		//Merge
 		pos.X = 22; pos.Y = (4 * 1) + 2 + 4 * 4;
 		SetConsoleCursorPosition(consol, pos);
@@ -210,17 +210,17 @@ int main()
 		if (x == 0)
 		{
 			for (int i = 0; i < NTEST; i++)
-				arr1[i] = i;
+				arr1[i] = i / 10.0;
 		}
 		if (x == 1)
 		{
 			for (int i = 0; i < NTEST; i++)
-				arr1[i] = NTEST - i;
+				arr1[i] = (NTEST - i) / 10.0;
 		}
 		if (x == 2)
 		{
 			for (int i = 0; i < NTEST; i++)
-				arr1[i] = rand() % FORTESTS;
+				arr1[i] = (rand() % FORTESTS) / 10.0;
 		}
 		printf("Bubble\n");
 		TestD(bubbleSort, arr1, NTEST);
@@ -263,24 +263,24 @@ int main()
 		int N = D1;
 		double* arrDSred = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDSred[i] = rand() % D1 / 10;
+			arrDSred[i] = (rand() % D1) / 10.0;
 		double* arrDBest = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDBest[i] = i;
+			arrDBest[i] = i / 10.0;
 		double* arrDWorst = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDWorst[i] = N - i;
+			arrDWorst[i] = (N - i) / 10.0;
 
 		N = D2;
 		double* arrDSred1 = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDSred1[i] = rand() % D2 / 10;
+			arrDSred1[i] = (rand() % D2) / 10.0;
 		double* arrDBest1 = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDBest1[i] = i;
+			arrDBest1[i] = i / 10.0;
 		double* arrDWorst1 = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDWorst1[i] = N - i;
+			arrDWorst1[i] = (N - i) / 10.0;
 
 		N = D3;
 		int* arrISred = (int*)malloc(N * sizeof(int));
