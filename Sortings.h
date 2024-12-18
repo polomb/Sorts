@@ -20,6 +20,7 @@ void shellSort(double* array, int size);
 
 void countingSort(int* arr, int N);
 void radixSort(int* arr, int N);
-void RedixExt(int* arr, int N, int exp);
+void RedixExt(int* arr, int N, int exp, int* dop);
 
 #endif
+
