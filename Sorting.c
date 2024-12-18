@@ -25,7 +25,7 @@ void shellSort(double* array, int size);
 
 void countingSort(int* arr, int N);
 void radixSort(int* arr, int N);
-void RedixExt(int* arr, int N, int exp);
+void RedixExt(int* arr, int N, int exp, int* dop);
 
 //Сортировка пузырьком
 void bubbleSort(double* arr, int N)
@@ -209,12 +209,13 @@ void radixSort(int* arr, int N)
 	for (int i = 1; i < N; i++)
 		if (maxim < arr[i])
 			maxim = arr[i];
-	for (int exp = 1; (maxim / exp) > 0; exp *= 10)
-		RedixExt(arr, N, exp);
-}
-void RedixExt(int* arr, int N, int exp)
-{
 	int* dop = (int*)malloc(N * sizeof(int));
+	for (int exp = 1; (maxim / exp) > 0; exp *= 10)
+		RedixExt(arr, N, exp, dop);
+	free(dop);
+}
+void RedixExt(int* arr, int N, int exp, int* dop)
+{
 	/*for (int a = 0; a < N; a++)
 	{
 		dop[a] = -1;
@@ -238,7 +239,6 @@ void RedixExt(int* arr, int N, int exp)
 	}
 	for (i = 0; i < N; i++)
 		arr[i] = dop[i];
-	free(dop);
 }
 
 //Таймер
