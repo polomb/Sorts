@@ -5,9 +5,9 @@
 #include "Sortings.h"
 
 #define A 8
-#define D1 20000
-#define D2 2000000
-#define D3 20000000
+#define D1 200000
+#define D2 20000000
+#define D3 200000000
 #define FORCOUNT 100
 #define FORRADIX 100
 
@@ -189,17 +189,17 @@ int main()
 		if (x == 0)
 		{
 			for (int i = 0; i < NTEST; i++)
-				arr1[i] = i / 10.0;
+				arr1[i] = (i * 10.0) / 10.0;
 		}
 		if (x == 1)
 		{
 			for (int i = 0; i < NTEST; i++)
-				arr1[i] = (NTEST - i) / 10.0;
+				arr1[i] = ((NTEST - i) * 10.0) / 10.0;
 		}
 		if (x == 2)
 		{
 			for (int i = 0; i < NTEST; i++)
-				arr1[i] = (rand() % FORTESTS) / 10.0;
+				arr1[i] = ((rand() % FORTESTS) * 10.0) / 10.0;
 		}
 		printf("Bubble\n");
 		TestD(bubbleSort, arr1, NTEST);
@@ -242,24 +242,24 @@ int main()
 		int N = D1;
 		double* arrDSred = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDSred[i] = (rand() % D1) / 10.0;
+			arrDSred[i] = ((rand() % D1)*10.0) / 10.0;
 		double* arrDBest = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDBest[i] = i / 10.0;
+			arrDBest[i] = (i * 10.0) / 10.0;
 		double* arrDWorst = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDWorst[i] = (N - i) / 10.0;
+			arrDWorst[i] = ((N - i) * 10.0) / 10.0;
 
 		N = D2;
 		double* arrDSred1 = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDSred1[i] = (rand() % D2) / 10.0;
+			arrDSred1[i] = ((rand() % D2) * 10.0) / 10.0;
 		double* arrDBest1 = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDBest1[i] = i / 10.0;
+			arrDBest1[i] = (i * 10.0) / 10.0;
 		double* arrDWorst1 = (double*)malloc(N * sizeof(double));
 		for (int i = 0; i < N; i++)
-			arrDWorst1[i] = (N - i) / 10.0;
+			arrDWorst1[i] = ((N - i) * 10.0) / 10.0;
 
 		N = D3;
 		int* arrISred = (int*)malloc(N * sizeof(int));
@@ -290,7 +290,6 @@ int main()
 			int b2 = D2 - ((D2 / 20) * a);
 			int b3 = D3 - ((D3 / 20) * a);
 			//Это для того, чтобы всё было одной строкой
-
 			printf("N;%d;Bubble;%0.3lf;%0.3lf;%0.3lf;", b1, TimerD(bubbleSort, arrDWorst, b1), TimerD(bubbleSort, arrDSred, b1), TimerD(bubbleSort, arrDBest, b1));
 			printf("Insertion;%0.3lf;%0.3lf;%0.3lf;", TimerD(insertionSort, arrDWorst, b1), TimerD(insertionSort, arrDSred, b1), TimerD(insertionSort, arrDBest, b1));
 			printf("Select;%0.3lf;%0.3lf;%0.3lf;", TimerD(selectSort, arrDWorst, b1), TimerD(selectSort, arrDSred, b1), TimerD(selectSort, arrDBest, b1));
